@@ -85,3 +85,66 @@ for (let [i, el] of menu.entries()) {
 // OPTIONAL CHAINING (?.)
 console.log(restaurant.order?.("cheese", "olives", "tomato") ?? "Method does not exist");
 console.log(restaurant.orderPizza?.("ham", "onions") ?? "Method does not exist");
+
+// SETS
+const staff = ["waiter", "chef", "waiter"];
+let uniqueStaff = [...new Set(staff)];
+console.log(uniqueStaff);
+
+console.log(new Set("Barbara").size);   // How many unique chars in the name
+
+const arr1 = new Set([1, 2, 3]);
+const arr2 = new Set([2, 4, 6]);
+
+// SET METHODS
+let intersection = arr1.intersection(arr2);     // INTERSECTION - Values common to both sets
+let union = arr1.union(arr2);                   // UNION - All values from both sets
+let unique1 = arr1.difference(arr2);            // DIFFERENCE - Values that only exist in first set
+let unique1_2 = arr1.symmetricDifference(arr2); // SYMETRIC DIFFERENCE - Values that are not common to both sets
+let shareValues = arr1.isDisjointFrom(arr2);    // DISJOINT - whether or not both sets share any value
+console.log("Intersection: ", ...intersection);
+console.log("Union: ", ...union);
+console.log("Difference 1: ", ...unique1);
+console.log("Symetric Difference: ", ...unique1_2);
+console.log("Is Disjoint? ", shareValues);
+
+// MAP METHODS
+let rest = new Map();
+// multiple sets are allowed since the method returns the updated map
+rest.set("open", "11h30")
+    .set("close", "15h")
+    .set("capacity", 60);
+console.log(rest);
+
+for (const [key, value] of rest) {
+    console.log(`${key}: ${value}`);
+}
+
+const question = new Map([
+    ["question", "What's the best programming language?"],
+    [1, "C"],
+    [2, "Java"],
+    [3, "C#"],
+    [4, "Javascript"],
+    ["correct", 4],
+    [true, "Correct!"],
+    [false, "Boohoo"]
+]);
+console.log(question["question"]);
+
+for (const [key, value] of question) {
+    if (typeof key === "number") {
+        console.log(`${key}: ${value}`);
+    }
+}
+
+let answer = Number(prompt("Answer"));
+console.log(question.get(answer == question.get("correct")));
+
+console.log([...question]);     // Map to array
+
+// Strings
+let cheer = "When I say Hey, you say Ho... Hey! Hey!";
+console.log(cheer.replace("Hey", "Hatee"));
+console.log(cheer.replaceAll("Hey", "Hatee"));
+console.log(cheer.replace(/Hey/g, "Hatee"));    // Same behaviour as replaceAll

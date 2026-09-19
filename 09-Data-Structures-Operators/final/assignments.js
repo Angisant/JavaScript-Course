@@ -517,3 +517,213 @@ function getFirstKeyword(book) {
 }
 console.log(getFirstKeyword(books[0]));
 console.log(getFirstKeyword(newBook2));
+
+
+/*
+Below is the entries variable that stores an empty array. Use the for-of loop together with the Object.keys() 
+method to loop over the thirdParty.goodreads property (array) of the first book object from the books array. 
+For each key, push a new array that contains that key to the entries array.
+*/
+const entries = [];
+for (let keys of Object.keys(firstBook.thirdParty.goodreads)) {
+    entries.push([keys]);
+}
+console.log(entries);
+
+
+/*
+Use the for-of loop together with the Object.values() method and Array's entries() method to loop over 
+thirdParty.goodreads property of the first book from the books array.
+Push each value to the appropriate inner array in the entries array (use index from entries()).
+*/
+for (let [index, value] of Object.values(firstBook.thirdParty.goodreads).entries()) {
+    entries[index].push(value);
+}
+console.log(entries);
+
+
+/*
+Use the Object.entries() method on the thirdParty.goodreads property of the first book from the books 
+array. Assign the returned value to the variable called entries2.
+*/
+var entries2 = Object.entries(firstBook.thirdParty.goodreads);
+console.log(entries2);
+
+
+/*
+Below is the allKeywords variable, which stores an empty array. Loop over the books array, and fill 
+the allKeywords array with the keywords coming from the keywords property of each book object. The 
+allKeywords array should have just one level (no nested arrays).
+*/
+const allKeywords = [];
+for (let { keywords } of books) {
+    allKeywords.push(...keywords);
+}
+console.log(allKeywords);
+
+
+/*
+The allKeyword array contains duplicates. Remove them by creating a Set out of that array. Assign the newly 
+created set to the uniqueKeywords variable.
+*/
+const uniqueKeywords = new Set(allKeywords);
+console.log(uniqueKeywords);
+
+
+/*
+Add two more keywords to the uniqueKeywords set, for example, 'coding' and 'science'.
+*/
+uniqueKeywords.add("coding");
+uniqueKeywords.add("science");
+console.log(uniqueKeywords);
+
+
+/*
+Delete 'business' from the uniqueKeywords set.
+*/
+uniqueKeywords.delete("business");
+console.log(uniqueKeywords);
+
+
+/*
+Create an array out of the uniqueKeywords set, and assign it to the uniqueKeywordsArr variable.
+*/
+const uniqueKeywordsArr = [...uniqueKeywords];
+console.log(uniqueKeywordsArr);
+
+
+/*
+Delete all items from the uniqueKeywords set.
+*/
+uniqueKeywords.clear();
+console.log(uniqueKeywords);
+
+
+/*
+Create a new book, but this time, as a Map. Assign it to the bookMap variable. Use this array as initial data:
+[['title', 'Clean Code'], ['author', 'Robert C. Martin']]
+*/
+let bookMap = new Map([["title", "Clean Code"], ["author", "Robert C. Martin"]]);
+console.log(bookMap);
+
+
+/*
+Set a new key in bookMap called pages, and assign it with a number 464.
+*/
+bookMap.set("pages", 464);
+console.log(bookMap);
+
+
+/*
+Get the title and author values from bookMap, and log to the console a string formatted like that: "${title} by ${author}".
+*/
+console.log(`${bookMap.get("title")} by ${bookMap.get("author")}`);
+
+
+/*
+Get the size of bookMap, and log it to the console.
+*/
+console.log(bookMap.size);
+
+
+/*
+Convert the first book object from the books array into a Map, and assign it to a firstBookMap variable.
+*/
+let firstBookMap = new Map();       // OR new Map(Object.entries(firstBook))
+for (const [key, value] of Object.entries(firstBook)) {
+    firstBookMap.set(key, value);
+}
+console.log(firstBookMap);
+
+
+/*
+Use the for-of loop to iterate over firstBookMap, and log to the console keys that have numbers as values.
+*/
+for (const [key, value] of firstBookMap) {
+    if (typeof value === "number") {
+        console.log(key);
+    }
+}
+
+
+/*
+Take the ISBN property of the first book from the books array, and log to the console characters at index 6, 4, 9 and 8. Use 
+bracket notation to access individual characters.
+*/
+console.log(firstBook.ISBN[6], firstBook.ISBN[4], firstBook.ISBN[9], firstBook.ISBN[8]);
+
+
+/*
+Below is the quote variable that stores a string. Find the index of the word 'chess', and log it to the console.
+*/
+const quote = 'A computer once beat me at chess, but it was no match for me at kick boxing';
+console.log(quote.indexOf("chess"));
+
+
+/*
+Extract the word "boxing" from the same quote string, and log it to the console.
+*/
+console.log(quote.slice(69));
+
+
+/*
+Some authors are noted as "(Contributor)", for example "Julie Sussman (Contributor)". Create a function called isContributor that 
+takes an author's name as an argument, and returns either true (if he's a contributor) of false (if he's not a contributor). The 
+string "(Contributor)" is always the last part of the author's name string.
+Code: isContributor('Julie Sussman (Contributor)');
+Expected output: true
+*/
+function isContributor(name) {
+    return name.indexOf("Contributor") >= 0
+}
+console.log(isContributor("Julie Sussman (Contributor)"));
+console.log(isContributor("Julie Sussman"));
+
+
+/*
+Write a function called normalizeAuthorName that takes an author's name (string) as an argument, and returns the same string, but 
+the first name and last name are capitalized, and the "(Contributor)" part is removed (if exists).
+You can be sure that the author's name always consists of two words separated by a space, and possibly ends with "(Contributor)". 
+The string may also contain trailing spaces.
+Code: normalizeAuthorName('  JuliE sussMan (Contributor)')
+Expected output: "Julie Sussman"
+*/
+function normalizeAuthorName(name) {
+    let trimmedName = name.replace("(Contributor)", "").trim().toLowerCase();
+    let spaceIdx = trimmedName.indexOf(" ")
+    return trimmedName[0].toUpperCase() + trimmedName.slice(1, spaceIdx + 1) + trimmedName[spaceIdx + 1].toUpperCase() + trimmedName.slice(spaceIdx + 2)
+}
+console.log(normalizeAuthorName('  JuliE sussMan (Contributor)'));
+
+
+/*
+Take the title of the second book (books[1]) from the books array, and replace the word "Programs" with "Software". Assign the new 
+string to the newBookTitle variable.
+*/
+let newBookTitle = secondBook.title.replace("Programs", "Software");
+console.log(newBookTitle);
+
+
+/*
+Write a function called logBookTheme that takes book's title (string), and logs to the console:
+"This book is about computers" if the title starts with the word "computer",
+"This book is about algorithms and data structures" if the title includes both the "algorithms" and "structures" words,
+and, "This book is about some systems, but definitely not about operating systems" if the title ends with the word "system" or "systems", 
+but doesn't include the word "operating".
+*/
+function logBookTheme(title) {
+    const lowTitle = title.toLowerCase();
+
+    if (lowTitle.startsWith("computer")) {
+        console.log("This book is about computers");
+    }
+
+    if (lowTitle.includes("algorithms") && lowTitle.includes("structures")) {
+        console.log("This book is about algorithms and data structures");
+    }
+
+    if ((lowTitle.endsWith("system") || lowTitle.endsWith("systems")) && !lowTitle.includes("operating")) {
+        console.log("This book is about some systems, but definitely not about operating systems");
+    }
+}
+logBookTheme("Computer Science");

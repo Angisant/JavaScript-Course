@@ -10,6 +10,7 @@
     body {
       height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       background: linear-gradient(to top left, #28b487, #7dd56f);
     }
@@ -25,7 +26,7 @@
     }
 
     button {
-      width: 50px;
+      width: 100px;
       height: 20px;
       margin: 10px;
     }
@@ -39,7 +40,21 @@
 
 <body>
   <h1>Data Structures and Modern Operators</h1>
-  <script src="script.js"></script>
+  <div>
+    <button onclick="loadScript('script.js')">Script</button>
+    <button onclick="loadScript('assignments.js')">Assignments</button>
+    <button onclick="loadScript('challenge1.js')">Challenge 1</button>
+    <button onclick="loadScript('challenge2.js')">Challenge 2</button>
+    <button onclick="loadScript('challenge3.js')">Challenge 3</button>
+  </div>
 </body>
+
+<script>
+  function loadScript(file) {
+    const script = document.createElement("script");
+    script.setAttribute("src", file);
+    document.head.append(script);
+  }
+</script>
 
 </html>
